@@ -1,6 +1,8 @@
 import sys, os, base64
 from playwright.sync_api import sync_playwright
 name = sys.argv[1]
+GROUPE = name == "groupe"
+if GROUPE: name = "khalil"
 S = f"shots_{name}"
 def img(tag, w=100):
     b = base64.b64encode(open(f"{S}/{tag}.png","rb").read()).decode()
@@ -119,6 +121,8 @@ for t, a in CR:
         a += f"<div class='fig'>{img('fig12',100)}<div class='cap'>Figure 2 – MSE d’entraînement en fonction des époques</div></div>"
     cr.append(f"<div class='cr'><h4>{t}</h4>{a}</div>")
 
+meta = (f'<div class="meta"><span><b>Nom :</b> {who}</span><span><b>Environnement :</b> {outil}</span></div>' if not GROUPE else
+  '<div class="meta"><span><b>Trinôme :</b> Khalil ZEFFANA – Younes KHALFI – Walid Abdellah KHEIRI</span><span><b>Environnement :</b> Google Colab</span></div>')
 html = f"""<!doctype html><html><head><meta charset="utf-8"><style>
 @page{{size:A4;margin:16mm 15mm 16mm 15mm}}
 {style}
@@ -139,7 +143,7 @@ table.met th{{background:#e6e6e6}}
 .fig{{width:58%;margin:4px auto 6px}} .cap{{text-align:center;font-size:9.5pt;font-style:italic}}
 </style></head><body>
 <div class="head"><h1>Compte rendu – TP3 : Régression linéaire multiple</h1>
-<div class="meta"><span><b>Nom :</b> {who}</span><span><b>Environnement :</b> {outil}</span></div></div>
+{meta}</div>
 
 <h2>Compte rendu</h2>
 {''.join(cr)}
@@ -147,8 +151,9 @@ table.met th{{background:#e6e6e6}}
 <h2 style="break-before:page">Annexe – Travail réalisé sur {outil}</h2>
 {''.join(parts)}
 </body></html>"""
+if GROUPE: name = "groupe"
 open(f"CR_{name}.html","w").write(html)
-pdf = {"khalil":"CR_TP3_Khalil_Zeffana.pdf","younes":"CR_TP3_Younes_Khalfi.pdf"}[name]
+pdf = {"groupe":"CR_TP3_Zeffana_Khalfi_Kheiri.pdf","khalil":"CR_TP3_Khalil_Zeffana.pdf","younes":"CR_TP3_Younes_Khalfi.pdf"}[name]
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path="/opt/pw-browsers/chromium", args=["--no-sandbox"])
     pg = b.new_page()
