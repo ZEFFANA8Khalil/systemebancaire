@@ -160,7 +160,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, SGDRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score"""),
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+plt.style.use('ggplot')"""),
 ("Q1a", """# Q1 - chargement
 data = pd.read_csv('prix_maisons.csv')
 data.head()"""),
@@ -221,8 +223,8 @@ res.round(4)"""),
 pd.DataFrame({'LR': lr.coef_, 'SGD': sgd.coef_, 'ecart': lr.coef_ - sgd.coef_}, index=features).round(3)"""),
 ("Q9", """# Q9 - reel vs predit
 plt.figure(figsize=(7, 5))
-plt.scatter(y_test, y_pred_lr, alpha=0.7, label='LinearRegression')
-plt.scatter(y_test, y_pred_sgd, marker='x', color='tab:red', label='SGDRegressor')
+plt.scatter(y_test, y_pred_lr, alpha=0.7, color='seagreen', label='LinearRegression')
+plt.scatter(y_test, y_pred_sgd, marker='x', color='darkviolet', label='SGDRegressor')
 m = min(y_test.min(), y_pred_lr.min(), y_pred_sgd.min())
 M = max(y_test.max(), y_pred_lr.max(), y_pred_sgd.max())
 plt.plot([m, M], [m, M], 'k--', label='Prédiction parfaite')
@@ -264,7 +266,7 @@ for ep in range(100):
     mse.append(mean_squared_error(y_train, suivi.predict(X_train_s)))
 
 plt.figure(figsize=(7, 4))
-plt.plot(range(1, 101), mse, color='tab:green')
+plt.plot(range(1, 101), mse, color='darkorange', linewidth=2)
 plt.xlabel("Époque")
 plt.ylabel("MSE (train)")
 plt.title("MSE d'entraînement en fonction des époques")

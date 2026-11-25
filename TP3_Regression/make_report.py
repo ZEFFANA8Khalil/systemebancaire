@@ -89,7 +89,15 @@ else:
      ("8. Évolution de l’erreur", "La MSE diminue très rapidement puis se stabilise (≈ 192). On en déduit que le modèle a convergé dès les premières époques."),
      ("9. Nouvelle maison", "LinearRegression prédit 307,64 et SGDRegressor 309,18 milliers d’unités monétaires, soit des prix très proches (≈ 1,5 d’écart)."),
     ]
-    style = "body{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.6pt}"
+    style = """body{font-family:'Liberation Sans',Arial,sans-serif;font-size:10.6pt}
+.head{border:none!important;background:#1f3b5c;color:#fff;padding:10px 14px!important;border-radius:3px}
+.head h1{text-align:left!important;color:#fff}
+h2{color:#1f3b5c;border-bottom:2px solid #2e86ab!important}
+h3,h4{color:#2e86ab}
+table.met th{background:#2e86ab!important;color:#fff}
+table.met tr:nth-child(odd) td{background:#eef6fa}
+img.shot{border:1px solid #2e86ab!important}
+.cap{color:#1f3b5c}"""
 
 table = """<table class="met"><tr><th>Modèle</th><th>MAE</th><th>RMSE</th><th>R²</th></tr>
 <tr><td>LinearRegression</td><td>11,596</td><td>14,158</td><td>0,9489</td></tr>
